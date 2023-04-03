@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+}
+body{
+  background-image: url(http://www.clker.com/cliparts/a/A/p/m/a/s/dog-tracks-hi.png);
+}
+.container-login {
+  display: flex;
+
+  margin: auto;
+  margin-top: 180px;
+  width: 50vw;
+}
+.left-container {
+  width: 50vw;
+  position: relative;
+  text-align: center;
+  background: #807182;
+}
+
+.login {
+ 
+
+  width: 50vw;
+
+ 
+}
+.login-form {
+  border: 1px solid rgba(138, 67, 25, 0.938);
+  background: #f9c7c2;
+}
+.login-form input[type="text"] {
+  width: 100%;
+  height: 30px;
+  border-radius: 17px;
+  margin: 15px 0;
+}
+.login-form .last {
+  background: #807182;
+  border: 1px solid transparent;
+  color: #fff;
+  width: 80%;
+  margin: 33px 20px;
+  height: 30px;
+}
+.login-form .last:hover {
+  background: #171a2b;
+}
+.left-container.puppy {
+  bottom: -1px;
+  position: absolute;
+  text-align: center;
+}
+.left-container.puppy:before {
+  background: #807182;
+  content: "";
+  height: 100%;
+  left: 0;
+  opacity: 0.4;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+.left-container img {
+  filter: sepia(100%);
+  width: 100%;
+
+ 
+}
+

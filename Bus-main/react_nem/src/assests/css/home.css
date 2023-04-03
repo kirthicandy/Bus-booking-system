@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.carousel-inner{
+    position: fixed;
+}
+#bgvid{
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    
+   
+}
+.action{
+    top:30px;
+}
+.carousel-caption{
+    
+    
+   height: 100%;
+   left: 0;
+ 
+
+    background-color: rgba(49, 48, 48, 0.5);
+   
+  
+    color: #fff;
+}
