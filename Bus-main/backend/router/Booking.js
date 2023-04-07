@@ -11,23 +11,41 @@ router.get("/", async (req, res) => {
     res.send("Error" + err);
   }
 });
+router.post("/mybook", async (req, res) => {
+  const{user_id}=req.body
+try {
+  const detail = await booking.find({user_id});
+  res.json(detail);
+} catch (err) {
+  res.send("Error" + err);
+}
+});
 
 router.post("/", async (req, res) => {
-  const { bus_id, user_id, Name, Age, Gender, Boarding_point,Dropping_point,No_of_seats,Booked_seats,Total_price } =
+  const {   bus_id,
+    user_id,
+    name,
+    age,
+    gender,
+    boarding_point,
+    dropping_point,
+    no_of_seats,
+    booked_seats,
+    total_price } =
     req.body;
 
   try {
     await booking.create({
         bus_id,
         user_id,
-        Name,
-        Age,
-        Gender,
-        Boarding_point,
-        Dropping_point,
-        No_of_seats,
-        Booked_seats,
-        Total_price
+        name,
+        age,
+        gender,
+        boarding_point,
+        dropping_point,
+        no_of_seats,
+        booked_seats,
+        total_price
         
     });
     res.send({ status: "ok" });

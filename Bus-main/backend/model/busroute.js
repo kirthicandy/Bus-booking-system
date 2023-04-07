@@ -6,33 +6,40 @@ const busSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     auto: true,
   },
-  Bus_id: {
+  bus_id: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  Source: {
+  source: {
     type: String,
     required: true,
   },
 
-  Destination: {
+  destination: {
     type: String,
     required: true,
   },
 
-  Arrival_time: {
-    type: String,
+  arrival_time: {
+    type: Date,
     required: true,
   },
-  Departure_time: {
+  available_Seat:{
     type: String,
+
+  },
+  reserved_seat:{
+    type: String,
+  },
+  departure_time: {
+    type: Date,
     required: true,
   },
-  Boarding_point: {
+  boarding_point: {
     type: Array,
     required: true,
   }, 
-  Dropping_point: {
+  dropping_point: {
     type: Array,
     required: true,
   },

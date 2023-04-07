@@ -7,6 +7,8 @@ import UserDetails from "./pages/UserDetails";
 import SeatPicker from "./pages/SeatPicker";
 import Add from "./pages/Add";
 import Update from './pages/Update'
+import MyBooking from "./pages/MyBooking";
+
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
           <Route path="/seat" element={<SeatPicker/>}/>
           <Route path="/add" element={<Add/>}/>
           <Route path="/update" element={<Update/>}/>
+          <Route path="/mybook" element={<MyBooking/>}/>
+         
     
         </Routes>
       </BrowserRouter>

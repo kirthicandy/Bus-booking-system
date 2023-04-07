@@ -49,7 +49,7 @@ const Registration = (props) => {
       case "close":
         setpopup('open');
         return
-        case "open":
+      case "open":
         setpopup('close');
         return
     

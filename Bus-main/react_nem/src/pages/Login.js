@@ -79,12 +79,12 @@ export default function Login(props) {
           </div>
           <br></br>
           <p className="forgot-password text-right">
-            <button onClick={<Registration/>}>Sign Up</button> 
+           
             
           </p>
         </form>
       </div>
-    </div>:<Registration/>}
+    </div>:""}
     </>
 
   );

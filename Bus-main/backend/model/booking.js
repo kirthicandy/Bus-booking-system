@@ -17,36 +17,36 @@ const bookingSchema = new mongoose.Schema({
     required:true
   },
 
-  Name: {
+  name: {
     type: String,
     
   },
 
-  Age: {
+  age: {
     type: String,
 
   },
-  Gender: {
+  gender: {
     type: String,
     
   },
-  Boarding_point: {
-    type: Array,
+  boarding_point: {
+    type: String,
    
   }, 
-  Dropping_point: {
-    type: Array,
+  dropping_point: {
+    type: String,
     
   }, 
-  No_of_seats: {
-    type: Array,
+  no_of_seats: {
+    type: String,
     
   }, 
-  Booked_seats: {
+  booked_seats: {
     type: Array,
     
   },
-   Total_price: {
+   total_price: {
     type: String,
   
   },

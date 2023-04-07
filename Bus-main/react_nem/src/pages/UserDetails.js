@@ -22,9 +22,10 @@ try{
           console.log("hi")
         } else {
           setUserData(data.data.data);
-          setAdmin(data.data.data.email === "rajk12@gmail.com");
+          setAdmin(data.data.data.email === "kirthicandy12@gmail.com");
+          window.localStorage.setItem("user_id",data.data.data._id)
+          console.log("user_id",data.data.data._id)
           console.log("data",data.data.data.email)
-          console.log("hi")
         }
       });
     

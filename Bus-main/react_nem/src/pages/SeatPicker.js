@@ -35,7 +35,7 @@ export default function SeatPicker() {
     axios
       .post("http://localhost:2112/busroute/agi", {
         id: localStorage.getItem("selectedBusId"),
-        Source: localStorage.getItem("Source"),
+        source: localStorage.getItem("Source"),
       })
       .then((data) => {
         if (data.status === "error") {
@@ -99,8 +99,8 @@ export default function SeatPicker() {
     console.log("hi", seatNumber.length);
     setDetails(handleUser());
     console.log("hi", userData._id);
-    setDrop(userData.Dropping_point);
-    setboard(userData.Boarding_point);
+    setDrop(userData.dropping_point);
+    setboard(userData.boarding_point);
     setMul(seatNumber.length * userData.businfos[0].Price);
     handleTotal();
     // setProcess(handleProceed());
@@ -124,19 +124,20 @@ export default function SeatPicker() {
    
     await axios
       .post("http://localhost:2112/booking", {
-        "bus_id": userData.Bus_id,
+        "bus_id": userData.bus_id,
         "user_id": localStorage.getItem("Userid"),
-        "Name": name,
-        "Age": age,
-        "Gender": gender,
-        "Boarding_point": userboard,
-        "Dropping_point": userdrop,
-        "No_of_seats": seatNo,
-        "Booked_seats": bookedSeat,
-        "Total_price": mul,
+        "name": name,
+        "age": age,
+        "gender": gender,
+        "boarding_point": userboard,
+        "dropping_point": userdrop,
+        "no_of_seats": bookedSeat,
+        "booked_seats": seatNo,
+        "total_price": mul,
       })
       .then((res) => {
         console.log(res.data);
+      
         // const data = res.data
         // if(data === "Existed"){
         //    alert( "User is Existed")
@@ -322,7 +323,7 @@ export default function SeatPicker() {
                         <label htmlFor="1A">1A</label>
                       </li>
                       <li className="seat">
-                        <input type="checkbox" id="1B" value="1B" />
+                        <input type="checkbox" id="1B" value="1B" disabled />
                         <label htmlFor="1B">1B</label>
                       </li>
                       <li className="seat">
@@ -527,7 +528,7 @@ export default function SeatPicker() {
 
           <div>
             <div className="d-flex flex-row align-items-center mt-4 ">
-              <MDBIcon class="fas fa-mobile me-4" size="lg" />
+             
               <MDBInput
                 name="user"
                 placeholder="text "
@@ -538,7 +539,7 @@ export default function SeatPicker() {
               />
             </div>
             <div className="d-flex flex-row align-items-center mt-4 ">
-              <MDBIcon class="fas fa-mobile me-4" size="lg" />
+             
               <MDBInput
                 name="text"
                 placeholder="text "
@@ -548,7 +549,7 @@ export default function SeatPicker() {
               />
             </div>
             <div className="d-flex flex-row align-items-center mt-4 ">
-              <MDBIcon class="fas fa-mobile me-4" size="lg" />
+             
               <MDBInput
                 name="te"
                 placeholder="text "
@@ -558,7 +559,7 @@ export default function SeatPicker() {
               />
             </div>
             <div className="d-flex flex-row align-items-center mt-4 ">
-              <MDBIcon class="fas fa-mobile me-4" size="lg" />
+             
               <MDBInput
                 name="xt"
                 placeholder="text "
