@@ -94,7 +94,7 @@ router.post("/", async (req, res) => {
 });
 router.put("/:id", async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.body;
 
     const detail = await busroute.findByIdAndUpdate(id, req.body, {
       new: true,

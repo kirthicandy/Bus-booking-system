@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const booking = require("../model/booking");
+const busroute = require("../model/busroute");
 const mongoose = require("mongoose");
 
 router.get("/", async (req, res) => {
@@ -24,9 +25,8 @@ try {
 router.post("/", async (req, res) => {
   const {   bus_id,
     user_id,
-    name,
-    age,
-    gender,
+    particularbus_id,
+    passenger_detail,
     boarding_point,
     dropping_point,
     no_of_seats,
@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
     await booking.create({
         bus_id,
         user_id,
-        name,
+        passenger_detail,
         age,
         gender,
         boarding_point,
@@ -47,7 +47,10 @@ router.post("/", async (req, res) => {
         booked_seats,
         total_price
         
-    });
+    }).then(async()=>{
+      await busroute.findByIdAndUpdate({_id:particularbus_id},{$push:{reserved_seat:booked_seats}})
+
+    })
     res.send({ status: "ok" });
   } catch (error) {
     res.send({ status: "error",message:error});

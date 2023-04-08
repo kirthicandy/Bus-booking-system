@@ -160,7 +160,7 @@ export default function SeatPicker() {
       return (
         <>
           <form key={idx} className="form seatfrm">
-            <span class="text-capitalize text-center"></span>
+            <span class="text-capitalize text-center">{seat}</span>
           </form>
         </>
       );

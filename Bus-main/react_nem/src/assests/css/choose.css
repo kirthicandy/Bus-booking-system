@@ -6,41 +6,22 @@
 body{
   background-color: rgba(0, 0, 0,0.3);
 }
-.container {
-  display: flex;
+.seatcontainer {
 
+background-color: #c8eef1;
+display: flex;
+flex-wrap: wrap;
+  
 
-  width: 100vw;
-  height: 90vh;
   margin: 33px auto
 }
 
-html {
-  font-size: 16px;
-}
-
-.plane {
-  margin: 50px 30px;
-  max-width: 300px;
-  background-color: rgba(255, 255, 255, 0.534);
-  border-radius: 5px;
-}
-
-.fuselage {
-  border: 1px solid #d8d8d8;
-}
-
-ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
 
 .seats {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width: 800px;
 }
 
@@ -51,44 +32,29 @@ ol {
   position: relative;
 }
 
-.seat:nth-child(2) {
-  margin-right: 15%;
+
+
+.seat input[type="checked"]{
+ position: absolute;
+ display: none;
+ 
 }
 
-/* .seat input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-} */
 
-.seat input[type="checkbox"]:checked + label {
-  background: #85c2bd;
-  color: black;
-  -webkit-animation-name: rubberBand;
-  animation-name: rubberBand;
-  animation-duration: 300ms;
-  animation-fill-mode: both;
-}
 
-.seat input[type="checkbox"]:disabled + label {
-  background: rgb(212, 112, 112);
-  text-indent: -9999px;
-  overflow: hidden;
-}
 
-.seat input[type="checkbox"]:disabled + label:after {
+
+
+/* .seat input[type="checkbox"]:disabled + label:after {
   content: "X";
   text-indent: 0;
   position: absolute;
   top: 4px;
   left: 50%;
   transform: translate(-50%, 0%);
-}
+} */
 
-.seat input[type="checkbox"]:disabled + label:hover {
-  box-shadow: none;
-  background-color: #bada55;
-  cursor: not-allowed;
-}
+
 
 .seat label {
   display: block;
@@ -221,18 +187,7 @@ ol {
   clear: both;
 }
 
-.container1 {
-  /* width: auto; */
-  width: 40%;
-  border: 1px solid #e8f1f5;
-  background-color: rgba(240, 248, 255, 0.548);
-}
-.container2 {
-  /* width: auto; */
-  width: 60%;
-  border: 1px solid #e8f1f5;
-  background-color: rgba(156, 150, 145, 0.5);
-}
+
 
 .seatInfo {
   /* position: relative;  */
@@ -243,35 +198,15 @@ ol {
   border-radius: 5px;
 }
 
-.seatfrm {
-  border: 1px solid white;
-}
-.seatInp {
-  margin-right: -8px;
-  width: 50%;
-}
 
-.form-check {
-  margin-left: 32px;
-  margin-top: 5px;
-}
+
 
 .seatBT {
   display: block;
   margin-left: 36%;
 }
 
-.hideBT {
-  display: none;
-}
 
-.activeArrow2 {
-  color: rgb(0, 63, 0);
-  position: absolute;
-  margin-top: 50px;
-  left: 370px;
-  animation: bounce 0.5s infinite linear;
-}
 
 @-webkit-keyframes bounce {
   0% {
@@ -347,23 +282,7 @@ ol {
     top: 0;
   }
 }
-.board-drop{
-  display: flex;
-  
-}
-.dropping_point, .boarding_point{
-  width: 50%;
-  height: 80px;
-  overflow-y: auto;
- 
-  
-}
-.book{
-  outline: none;
-  background: transparent;
-  border: none;
- 
-}
+
 
 
 

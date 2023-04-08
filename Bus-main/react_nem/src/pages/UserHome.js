@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../assests/css/userhome.css";
 import { PopupMenu } from "react-simple-widgets";
 import axios from "axios";
+import moment from "moment";
 
 import { Link } from "react-router-dom";
 import "../assests/css/userhome.css";
@@ -14,7 +15,7 @@ export default function BusList({ userData }) {
 
   const [choose, setChoose] = useState(null);
   const [choos, setChoos] = useState(null);
-  const [chooseDate, setChooseDate] = useState(null);
+  const [chooseDate, setChooseDate] = useState("");
 
   useEffect(() => {
     if (!choose) {
@@ -54,21 +55,13 @@ export default function BusList({ userData }) {
   }; 
   const getDateSearch = (e) => {
     setChooseDate(e.target.value);
-    console.log(e.target.value);
-
-    axios.get("http://localhost:2112/busroute/aggregate").then((data) => {
-      let chooseItem = data.data.filter(
-        (item) => item.arrival_time === e.target.value
-      );
-      setBusinfo(chooseItem);
-      console.log("hi", chooseItem);
-    });
+  
   };
   const handleFilter = (e) => {
     axios.get("http://localhost:2112/busroute/aggregate").then((data) => {
-      let chooseItem = data.data.filter(
-        (item) => item.source === choose && item.destination === choos 
-      );
+      let chooseItem = data.data.filter((bus)=>{let datee =moment(bus.arrival_time).format('YYYY-DD-MM')
+      console.log(datee,"=date==chp=",chooseDate)
+      return datee.includes(chooseDate) && bus.destination.toLowerCase().includes(choos) && bus.source.toLowerCase().includes(choose)})
       setBusinfo(chooseItem);
     });
   };
@@ -172,7 +165,9 @@ export default function BusList({ userData }) {
         <div className="buscontainer">
           {Businfo &&
             Businfo.length > 0 &&
-            Businfo.map((bus, idx) => {
+            Businfo
+            
+            .map((bus, idx) => {
               return (
                 <div key={idx} className="card mt-5 buslist">
                   <div className="row ml-5">
@@ -198,7 +193,7 @@ export default function BusList({ userData }) {
                       {bus.busroute[0].Bus_Type}
                     </div>
                     <div className="col-6 col-sm-4 mb-2 ml-0">
-                      <Link to="/seat">
+                      <Link to="/choose">
                         <button
                           className={
                             clas

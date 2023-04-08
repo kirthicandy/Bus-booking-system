@@ -16,20 +16,17 @@ const bookingSchema = new mongoose.Schema({
     ref: "info",
     required:true
   },
+  
+passenger_detail:[
+  {
+    name:String,
+    Age:String,
+    Gender:String
+  }
 
-  name: {
-    type: String,
-    
-  },
+],
+ 
 
-  age: {
-    type: String,
-
-  },
-  gender: {
-    type: String,
-    
-  },
   boarding_point: {
     type: String,
    
