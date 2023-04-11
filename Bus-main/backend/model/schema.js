@@ -28,10 +28,7 @@ const programSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userType:{
-        type:String,
-        required:true
-    },
+ 
     age: {
         type: String,
         required: true

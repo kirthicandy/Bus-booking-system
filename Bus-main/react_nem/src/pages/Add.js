@@ -1,33 +1,19 @@
 import React from "react";
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBCardImage,
-  MDBInput,
-  MDBIcon,
-  MDBRadio,
-} from "mdb-react-ui-kit";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
 
 const Add = () => {
   const info = {
-    Bus_id:"",
-    Bus_name:"",
-    Bus_number:"",
-    Available_seats:"",
-    Bus_Type:"",
-    Price:"",
+    Bus_name: "",
+    Bus_number: "",
+    Available_seats: "",
+    Bus_Type: "",
+    Price: "",
   };
   const [data, setData] = useState(info);
 
-  const { Bus_id, Bus_name, Bus_number, Available_seats, Bus_Type, Price } =
-    data;
+  const { Bus_name, Bus_number, Available_seats, Bus_Type, Price } = data;
 
   const handleChange = (event) => {
     console.log(event);
@@ -39,11 +25,8 @@ const Add = () => {
   };
 
   const handleSubmit = async (e) => {
-  
-
     await axios
       .post("http://localhost:2112/businfo", {
-        Bus_id: Bus_id,
         Bus_name: Bus_name,
         Bus_number: Bus_number,
         Available_seats: Available_seats,
@@ -53,146 +36,104 @@ const Add = () => {
       })
       .then((res) => {
         console.log(res);
-        alert("Successfully Registered")
-        window.open('/userDetails','_self')
-               
-      }).catch((err)=>{
-        console.log(err)
+        alert("Successfully Registered");
+        window.open("/userDetails", "_self");
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   return (
     <>
-      <MDBContainer fluid>
-        <MDBCard
-          className="text-black m-5 bg-secondary"
-          style={{ borderRadius: "25px" }}
-        >
-          <MDBCardBody>
-            <MDBRow>
-              <MDBCol
-                md="10"
-                lg="6"
-                className="order-2 order-lg-1 d-flex flex-column align-items-center"
-              >
-                <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-2">
-                  Sign up
-                </p>
-                <div>
-                  <h4>Register As</h4>
-                  <MDBRadio
-                    name="Bus_Type"
-                    id="inlineRadio1"
-                    onChange={handleChange}
-                    label="Sleeper/AC "
-                    value="Sleeper/AC "
-                    inline
-                  />
+      <div className="container bg-secondary">
+        <div className="form m-auto">
+          <h2 className="text-center">Bus Details</h2>
 
-                  <MDBRadio
-                    name="Bus_Type"
-                    id="inlineRadio2"
-                    onChange={handleChange}
-                    label="Sleeper/NA "
-                    value="Sleeper/NA"
-                    inline
-                  />
-                  <MDBRadio
-                    name="Bus_Type"
-                    id="inlineRadio3"
-                    onChange={handleChange}
-                    label="Seater/NA "
-                    value="Seater/NA"
-                    inline
-                  />   <MDBRadio
-                    name="Bus_Type"
-                    id="inlineRadio4"
-                    onChange={handleChange}
-                    label="Seater/NA "
-                    value="Seater/NA"
-                    inline
-                  />
-                </div>
-
-                <div className="d-flex flex-row align-items-center mt-4 ">
-                  <MDBIcon fas icon="user me-3" size="lg" />
-                  <MDBInput
-                    placeholder="Bus_id"
-                    id="form1"
-                    type="text"
-                    value={Bus_id}
-                    name="Bus_id"
-                    className="w-100"
-                    onChange={handleChange}
-                  />
-                </div>
+          <div className="input-group input-group-sm row p-2 ">
+            <label>Bus Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Small"
+              aria-describedby="inputGroup-sizing-sm"
+              name="Bus_name"
+              value={Bus_name}
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="input-group input-group-sm row p-2 ">
+            <label>Bus No:</label>
+            <input
+              type="text"
+              class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+              name="Bus_number"
+              value={Bus_number}
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="input-group input-group-sm row p-2 ">
+            <label>Number of Seats:</label>
+            <input
+              type="text"
+              class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+              name="Available_seats"
+              value={Available_seats}
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="p-2 m-3">
+            <input
+              type="radio"
               
-
-                <div className="d-flex flex-row align-items-center mt-4 ">
-                  <MDBIcon className="fas fa-globe me-3" size="lg" />
-                  <MDBInput
-                    placeholder="Bus Name"
-                    id="form1"
-                    type="text"
-                    name="Bus_name"
-                    value={Bus_name}
-                    className="w-100"
-                    onChange={handleChange}
-                  />
-                </div>
-               
-
-                <div className="d-flex flex-row align-items-center mt-4">
-                  <MDBIcon fas icon="envelope me-3" size="lg" />
-                  <MDBInput
-                    placeholder="Bus Number"
-                    id="form2"
-                    name="Bus_number"
-                    type="Bus_number"
-                    value={Bus_number}
-                    onChange={handleChange}
-                  />
-                </div>
-                
-
-                <div className="d-flex flex-row align-items-center mt-4">
-                  <MDBIcon fas icon="lock me-3" size="lg" />
-                  <MDBInput
-                    placeholder="Available seats"
-                    id="form3"
-                    name="Available_seats"
-                    type="Available_seats"
-                    value={Available_seats}
-                    onChange={handleChange}
-                  />
-                </div>
-                
-                
-                <div>
-                <MDBIcon fas icon="money me-3" size="lg" />
-                <MDBInput
-                    placeholder="Price"
-                    id="form3"
-                    name="Price"
-                    type="Price"
-                    value={Price}
-                    onChange={handleChange}
-                  />
-                </div>
-                 
-              
-                <button
-                  className="mt-4 btn btn-primary m-3"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </button>
-                
-              </MDBCol>
-
-            </MDBRow>
-          </MDBCardBody>
-        </MDBCard>
-      </MDBContainer>
+              name="Bus_Type"
+              value="Sleeper/NA"
+              id="Sleeper/NA"
+              onChange={handleChange}
+            ></input>
+            <label>Sleeper/NA</label>
+            <br />
+            <input
+              type="radio"
+              name="Bus_Type"
+              value="Sleeper/AC"
+              id="Sleeper/AC"
+              onChange={handleChange}
+            ></input>
+            <label>Sleeper/AC</label>
+            <br />
+            <input
+              type="radio"
+              name="Bus_Type"
+              value="Seater/NA"
+              id="Seater/NA"
+              onChange={handleChange}
+            ></input>
+            <label>Seater/NA</label>
+            <br />
+            <input
+              type="radio"
+              name="Bus_Type"
+              value="Seater/AC"
+              id="Seater/AC"
+              onChange={handleChange}
+            ></input>
+            <label>Seater/AC</label>
+          </div>
+          <div className="input-group input-group-sm row p-2  ">
+            <label>Price:</label>
+            <input
+              type="text"
+              class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+              name="Price"
+              value={Price}
+              onChange={handleChange}
+            ></input>
+          </div>
+          <div className="text-center" >
+           <button className="btn btn-primary" onClick={handleSubmit}>Submit</button> 
+          </div>
+        </div>
+      </div>
     </>
   );
 };

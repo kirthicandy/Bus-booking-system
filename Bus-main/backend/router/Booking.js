@@ -23,10 +23,12 @@ try {
 });
 
 router.post("/", async (req, res) => {
-  const {   bus_id,
+  const {    bus_id,
     user_id,
-    particularbus_id,
-    passenger_detail,
+    busroute_id,
+   name,
+   age,
+   gender,
     boarding_point,
     dropping_point,
     no_of_seats,
@@ -36,19 +38,20 @@ router.post("/", async (req, res) => {
 
   try {
     await booking.create({
-        bus_id,
-        user_id,
-        passenger_detail,
-        age,
-        gender,
-        boarding_point,
-        dropping_point,
-        no_of_seats,
-        booked_seats,
-        total_price
+      bus_id,
+      user_id,
+      busroute_id,
+     name,
+     age,
+     gender,
+      boarding_point,
+      dropping_point,
+      no_of_seats,
+      booked_seats,
+      total_price 
         
     }).then(async()=>{
-      await busroute.findByIdAndUpdate({_id:particularbus_id},{$push:{reserved_seat:booked_seats}})
+      await busroute.findByIdAndUpdate({_id:busroute_id},{$push:{reserved_seat:{ $each:booked_seats}}})
 
     })
     res.send({ status: "ok" });

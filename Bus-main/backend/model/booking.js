@@ -11,20 +11,29 @@ const bookingSchema = new mongoose.Schema({
     ref: "businfo",
     required:true
   },
+  busroute_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "busroute",
+    required: true,
+  },
  user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "info",
     required:true
   },
   
-passenger_detail:[
-  {
-    name:String,
-    Age:String,
-    Gender:String
-  }
-
-],
+  name: {
+    type: String,
+    required: true,
+  },
+  age: {
+    type: String,
+    required: true,
+  },
+  gender: {
+    type: String,
+    required: true,
+  },
  
 
   boarding_point: {

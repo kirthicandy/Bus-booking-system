@@ -9,6 +9,10 @@ import Add from "./pages/Add";
 import Update from './pages/Update'
 import MyBooking from "./pages/MyBooking";
 import Chooseseat from "./pages/Chooseseat";
+import RouteDetails from "./pages/RouteDetails";
+import UpdateBusInfo from "./pages/UpdateBusInfo";
+import UpdateRouteInfo from "./pages/UpdateRouteInfo";
+import AddRoute from "./pages/AddRoute";
 
 
 
@@ -28,6 +32,10 @@ function App() {
           <Route path="/update" element={<Update/>}/>
           <Route path="/mybook" element={<MyBooking/>}/>
           <Route path="/choose" element={<Chooseseat/>}/>
+          <Route path="/route/:id" element={<RouteDetails/>}/>
+          <Route path="/addroute/:id" element={<AddRoute/>}/>
+          <Route path="/updatebusinfo/:id" element={<UpdateBusInfo/>}/>
+          <Route path="/updaterouteinfo/:id" element={<UpdateRouteInfo/>}/>
          
     
         </Routes>

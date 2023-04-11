@@ -6,13 +6,16 @@ import "../assests/css/choose.css";
 const Chooseseat = () => {
  
   const [seat, setSeat] = useState([0]);
+  const [seatno, setSeatNo] = useState([0]);
+ 
   const [reservedSeat, setReservedSeat] = useState([]);
   const [seatNumber, setSeatNumber] = useState([]);
+  const [select, setSelect] = useState([]);
   const [userData, setUserData] = useState([]);
-  const [bookedSeat, setBookedSeat] = useState([0]);
+  const [bookedSeat, setBookedSeat] = useState([]);
   const [details, setDetails] = useState();
   const [price, setPrice] = useState("");
-  const [name, setName] = useState([]);
+  const [name, setName] = useState();
   const [age, setAge] = useState();
   const [gender, setGender] = useState();
   const [drop, setDrop] = useState([]);
@@ -49,33 +52,92 @@ const Chooseseat = () => {
       });
   };
   const getSeatNumber = (e) => {
-    renderPassengerData(reservedSeat);
+    renderPassengerData(seatNumber);
+   
 
     let newSeat = e.target.value;
     console.log(newSeat);
     if (reservedSeat.includes(newSeat)) {
-      setReservedSeat(reservedSeat.filter((seat) => seat !== newSeat));
-    } else {
-      setReservedSeat([...reservedSeat, newSeat]);
+      // e.target.disabled = true
+      if(seatNumber.includes(newSeat)){
+        setSeatNumber(seatNumber.filter((seat) => seat !== newSeat));
 
-      console.log(reservedSeat);
+
+      }
+    } else {
+      if (newSeat){setSeatNumber([...seatNumber, newSeat]);
+      setReservedSeat([...reservedSeat,newSeat]);
+     
+      console.log(seatNumber);}
+      
+      }
     }
-  };
+  
   const renderPassengerData = (seatArray) => {
     return seatArray.map((seat, idx) => {
       return (
         <>
-          <form key={idx} className="form seatfrm">
+          <div key={idx} className="seatfrm">
             <span class="text-capitalize text-center">Passenger{idx+1}</span>
             
-          </form>
+          </div>
+          </>
+      );
+    });
+  };
+  const handleSubmitDetails = (e) => {
+    e.preventDefault();
+    console.log("submit e tart",e.target.value);
+    // const updateItem = seat.map((item)=>{
+    //   if(item === select){
+    //     return {...item,checked:!item.checked,disabled:true}
+        
+    //   }
+    //   return item
+    // })
+    // setSeat(updateItem)
+    // setReservedSeat(...reservedSeat,select)
+
+
+
+    setSeatNo(seatNumber);
+    console.log("reservedseat", seatNumber);
+    console.log("Price",userData.bus_id)
+    setBookedSeat(seatNumber.length);
+    setDrop(userData[0].dropping_point);
+    setboard(userData[0].boarding_point);
+    console.log("hi", seatNumber.length);
+    setDetails(handleUser());
+    console.log("hi",userData[0].businfos[0].Price);
+    
+    setMul(seatNumber.length * userData[0].businfos[0].Price);
+   
+    handleTotal();
+    // setProcess(handleProceed());
+  };
+  const handleUser = () => {
+    return (
+       
+      <>
+       <div>{renderPassengerData(reservedSeat)}</div>
+       
+      </>
+    );
+  };
+  //Price calculation function
+  const handleTotal = (e) => {
+  
+    return (
+      <>
+        <div  >
+          <p>{details}</p>
           <label>Name:</label>
           <input
             className="boo mx-4"
             type="text"
             name="name"
             value={name}
-            onChange={(e) => setName(name.push(e.target.value))}
+            onChange={(e) => setName(e.target.value)}
           ></input>
           <br />
           <label>Age:</label>
@@ -92,7 +154,7 @@ const Chooseseat = () => {
             type="radio"
             name="gender"
             value="male"
-            onChange={(e) => setGender(e)}
+            onChange={(e) => setGender(e.target.value)}
           ></input>
           <label>Male</label>
           <input
@@ -100,7 +162,7 @@ const Chooseseat = () => {
             type="radio"
             name="gender"
             value="Female"
-            onChange={(e) => setGender(e)}
+            onChange={(e) => setGender(e.target.value)}
           ></input>
           <label>Female</label>
           <input
@@ -108,50 +170,10 @@ const Chooseseat = () => {
             type="radio"
             name="gender"
             value="Others"
-            onChange={(e) => setGender(e)}
+            onChange={(e) => setGender(e.target.value)}
           ></input>
           <label>Others</label>
-        </>
-      );
-    });
-  };
-  const handleSubmitDetails = (e) => {
-    e.preventDefault();
-    console.log("submit e tart",e.target.value);
-
-
-    console.log(reservedSeat);
-    setReservedSeat(reservedSeat);
-    console.log("seat", reservedSeat);
-    console.log("Price",userData.bus_id)
-    setBookedSeat(reservedSeat.length);
-    setDrop(userData[0].dropping_point);
-    setboard(userData[0].boarding_point);
-    console.log("hi", reservedSeat.length);
-    setDetails(handleUser());
-    console.log("hi",userData[0].businfos[0].Price);
-    
-    setMul(reservedSeat.length * userData[0].businfos[0].Price);
-   
-    handleTotal();
-    // setProcess(handleProceed());
-  };
-  const handleUser = () => {
-    return (
-       
-      <>
-       <form>{renderPassengerData(reservedSeat)}</form>
-       
-      </>
-    );
-  };
-  //Price calculation function
-  const handleTotal = (e) => {
-  
-    return (
-      <>
-        <form onSubmit={handleDetail}>
-          <p>{details}</p>
+        
 
           <div className="board-drop ">
             <div className="boarding_point mx-5">
@@ -193,7 +215,7 @@ const Chooseseat = () => {
               className="book mx-4"
               type="text"
               name="seatNo"
-              value={reservedSeat}
+              value={seatNumber}
             ></input>
             <br />
             <label>Number of booked seat:</label>
@@ -214,44 +236,63 @@ const Chooseseat = () => {
           </div>
 
           <div>
-            <button > Proceed</button>
+            <button onClick={handleDetail}> Proceed</button>
           </div>
-        </form>
+        </div>
       </>
     );
   };
   const handleDetail = async (e) => {
     e.preventDefault()
+
   
     console.log("hiefg4gt",e.target.value)
-    await axios
-      .post("http://localhost:2112/booking", {
-        particularbus_id:userData._id,
+    console.log("hiefg4gt with stify",JSON.stringify(reservedSeat))
+    console.log("hiefg4gt without stify",{
+       
+      bus_id: userData[0].bus_id,
+      user_id: localStorage.getItem("Userid"),
+      busroute_id:userData[0]._id,
+      name:name,
+      age:age,
+      gender:gender,
+      boarding_point: userboard,
+      dropping_point: userdrop,
+      no_of_seats: bookedSeat,
+      booked_seats:seatNumber ,
+      total_price: mul,
+    })
+
+
+    
+    const re = await axios.post("http://localhost:2112/booking", {
+       
         bus_id: userData[0].bus_id,
         user_id: localStorage.getItem("Userid"),
-        passenger_detail:{
-            name:name,
-            age:age,
-            gender:gender
-
-        },
+        busroute_id:userData[0]._id,
+        name:name,
+        age:age,
+        gender:gender,
         boarding_point: userboard,
         dropping_point: userdrop,
         no_of_seats: bookedSeat,
-        booked_seats: reservedSeat,
+        booked_seats:seatNumber ,
         total_price: mul,
       })
       .then((res) => {
         console.log(res.data);
+        window.location.reload()
 
-        // const data = res.data
-        // if(data === "Existed"){
-        //    alert( "User is Existed")
-        // }else{
-        //   window.open('/login')
-        // }
+        const data = res.data
+        if(data.status === "error"){
+           alert( "Enter valid Detail")
+        }else{
+          alert("succuss")
+        }
       });
+
   };
+ 
 
   return (
     <>
@@ -259,17 +300,21 @@ const Chooseseat = () => {
         <form onSubmit={handleSubmitDetails}>
           <div className="seatcontainer w-50">
             {seat.map((item, id) => (
-              <div className="seats w-25" key={id}>
+              <div className="seats w-25" key={id} onClick={(e)=>getSeatNumber(e,id)}>
                 <p className="seat w-100">
                   <input
                     type="checkbox"
                     name="seat"
                     value={item}
-                    disabled={reservedSeat.includes(item)}
-                    onChange={getSeatNumber}
+                     id={item}
+                     disabled={reservedSeat.includes(item)}
+                    
+
+                   
                   />
-                  <label>{item}</label>
+                  <label htmlFor={item}>{item}</label>
                 </p>
+               
               </div>
             ))}
           </div>

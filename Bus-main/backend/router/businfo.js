@@ -11,14 +11,21 @@ router.get("/", async (req, res) => {
     res.send("Error" + err);
   }
 });
-
+router.get("/:id", async (req, res) => {
+  try {
+    const detail = await businfo.findById(req.params.id);
+    res.json(detail);
+  } catch (err) {
+    res.send("Error" + err);
+  }
+});
 router.post("/", async (req, res) => {
-  const { Bus_id, Bus_name, Bus_number, Available_seats, Bus_Type, Price } =
+  const {  Bus_name, Bus_number, Available_seats, Bus_Type, Price } =
     req.body;
 
   try {
     await businfo.create({
-      Bus_id,
+    
       Bus_name,
       Bus_number,
       Available_seats,
@@ -67,6 +74,19 @@ router.delete('/:id',async(req,res)=>{
   try{
       const details = await businfo.findById(req.params.id)
       const pg = await details.remove()
+      res.json(pg)
+
+  }
+  catch(err){
+       console.log('err',err)
+  }
+})
+router.put('/update/:id',async(req,res)=>{
+  try{
+      const details = await businfo.findByIdAndUpdate(req.params.id,req.body,{
+
+              new:true})
+      const pg = await details.save()
       res.json(pg)
 
   }

@@ -1,12 +1,12 @@
 const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
+const Businfo = require("./Businfo");
 
 const busSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    auto: true,
-  },
+ 
   bus_id: {
+    ref: "businfo",
+
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },

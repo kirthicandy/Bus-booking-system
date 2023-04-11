@@ -37,5 +37,5 @@ catch(err){
 }
   },[])
 
-  return admin ? <AdminHome /> : <UserHome userData={userData}/>;
+  return admin ? <AdminHome adminData={userData} /> : <UserHome userData={userData}/>;
 }

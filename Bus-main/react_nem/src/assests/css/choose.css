@@ -37,6 +37,7 @@ flex-wrap: wrap;
 .seat input[type="checked"]{
  position: absolute;
  display: none;
+ opacity: 0;
  
 }
 
@@ -282,9 +283,3 @@ flex-wrap: wrap;
     top: 0;
   }
 }
-
-
-
-
-
-

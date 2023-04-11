@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 router.post("/register", async (req, res) => {
-  const { username, password, email, number, userType,gender,age} = req.body;
+  const { username, password, email, number,gender,age} = req.body;
 
   const encryptedPassword = await bcrypt.hash(password, 10);
   try {
@@ -28,7 +28,6 @@ router.post("/register", async (req, res) => {
       number,
       email,
       password: encryptedPassword,
-      userType,
       age,
       gender
     });

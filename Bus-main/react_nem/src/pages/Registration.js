@@ -29,7 +29,7 @@ const Registration = (props) => {
   };
   const [data, setData] = useState(info);
 
-  const [secretKey, setSecretKey] = useState("");
+  
   const {
     userType,
     username,
@@ -125,12 +125,8 @@ const Registration = (props) => {
     return Object.keys(err).length < 1;
   };
   const handleSubmit = async (e) => {
-    if (userType == "Admin" && secretKey != "Kirthi@12") {
-      e.preventDefault();
-      alert("Invalid Admin");
-    } else {
-      e.preventDefault();
-    }
+    e.preventDefault()
+
     validateForm();
     await axios
       .post("http://localhost:2112/info/register", {
@@ -145,10 +141,16 @@ const Registration = (props) => {
       .then((res) => {
         console.log(res);
         const data = res.data;
-        if (data === "Existed") {
+        if (data.error === "User Exists") {
           alert("User is Existed");
-        } else {
+        } else if(data.status ==="ok") {
           alert("Success");
+        
+     
+        
+        }
+        else{
+          alert("Enter Valid Details to Register")
         }
       });
   };

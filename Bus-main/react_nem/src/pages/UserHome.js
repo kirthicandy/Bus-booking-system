@@ -21,6 +21,7 @@ export default function BusList({ userData }) {
     if (!choose) {
       axios.get("http://localhost:2112/busroute/aggregate").then((data) => {
         setBusinfo(data.data);
+        
 
         // handleBusInfo()
       });
