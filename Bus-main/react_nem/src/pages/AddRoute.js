@@ -89,7 +89,7 @@ const AddRoute = () => {
   return (
     <>
       <div className="container d-flex ">
-        <div className="container2 w-50">
+        <div className="container2 w-50 ">
           <div className=" m-auto">
             <h2 className="text-center">Bus Route Details</h2>
 

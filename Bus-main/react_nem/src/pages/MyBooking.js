@@ -1,10 +1,11 @@
 import {React, useState,useEffect}from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 const MyBooking = () =>{
 
 const [data,setData] = useState()
+const [dataLength,setDataLength] = useState()
+
 
 useEffect(()=>{
     handleBooking()
@@ -16,70 +17,100 @@ const handleBooking = async() =>{
  
     
     )   .then((data)=>{
-        console.log(data);
+        setData(data.data)
+        setDataLength(data.data.length)
+        console.log(data.data)
+               
     })
     
 
 
 }
-// return(
-// <>
-//  <div className="container">
+const handleCancel = async(e,bId,busid,book) =>{
+   if(window.confirm("Are you Sure! You have to Cancel?")) {
+    await axios.put('http://localhost:2112/booking/cancel',{
+        booking_id:bId,
+        busroute_id:busid,
+        booked_seats:book
+    }
+    ).then((data)=>{
+        console.log(data)
+        
       
-//       <table className="table mt-5">
-//         <thead>
-//           <tr>
-//             <th> Passenger Name</th>
-//             <th>Bus_name</th>
-//             <th>Bus_number</th>
-//             <th>Available_seats</th>
-//             <th>Bus_Type</th>
-//             <th>Price</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {data.map((item, index) => {
-//             return (
-//               <tr key={item._id}>
-//                 <th scope="row">{index + 1}</th>
-//                 <td>{item.Bus_name}</td>
-//                 <td>{item.Bus_number}</td>
-//                 <td>{item.Available_seats}</td>
-//                 <td>{item.Bus_Type}</td>
-//                 <td>{item.Price}</td>
-//                 <td>
-//                   <span className="btn">
-//                     <Link to={`/update/${item._id}`}>
-//                       <i class="bi bi-pencil-square"></i>
-//                     </Link>
-//                   </span>
-//                   <span className="btn">
-//                     <i
-//                       class="bi bi-trash-fill"
-//                     //   onClick={() => handleDelete(item._id)}
-//                     ></i>
-//                   </span>
-//                   <span className="btn">
-//                     <i class="bi bi-eye-fill"></i>
-//                   </span>
-//                 </td>
-//               </tr>
-//             );
-//           })}
-//         </tbody>
-//       </table>
-      
-//     </div>
-//     <div className="text-right">
-//         <Link to="/add">
-//                     <button className="btn btn-primary ">Add New</button>
-//                   </Link>
-//       </div>
-
-
-//     </>
+    })
     
-//   );
+
+   }
+   else{
+    alert('Cancelled')
+   }
+ 
+ 
+   
+  
+}
+return(
+    <>
+     <div className="">
+    {dataLength >0?
+    <>
+   ({data && data.length>0 && data.map((item, index) => {
+        return (
+            <>
+            <h4>Booking {index+1}:</h4>
+             
+  <table className="table">
+  <thead>
+    <tr>
+      <th> S.No</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Boarding Point</th>
+      <th>Dropping Point</th>
+      <th>Ticket</th>
+      <th>Seat No</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+  {item.user_detail.map((i,id)=>(
+    <tr key={item._id}>
+    <th scope="row">{id + 1}</th>
+    <td>{i.name}</td>
+    <td>{i.gender}</td>
+    <td>{i.age}</td>
+    <td>{item.boarding_point}</td>
+    <td>{item.dropping_point}</td>
+    <td>{item.no_of_seats}</td>
+    <td>{item.booked_seats}</td>
+    <td>{item.total_price}</td>
+    <td></td>
+    
+  </tr>
+
+      ))}
+      
+      <button className="btn btn-secondary" onClick={()=>{handleCancel(item._id,item.busroute_id,item.booked_seats) }}  >Cancel</button>
+          
+          </tbody>
+          </table>
+         
+          <br/>
+          </>
+        )
+        
+      })})</>
+
+    
+:<h4>No Booking yet</h4>}
+     
+       
+         
+     
+    </div>
+    </>
+)
 
 
 }

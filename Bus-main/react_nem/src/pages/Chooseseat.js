@@ -7,17 +7,15 @@ const Chooseseat = () => {
  
   const [seat, setSeat] = useState([0]);
   const [seatno, setSeatNo] = useState([0]);
- 
+ const [showField ,setShowField] = useState(false)
   const [reservedSeat, setReservedSeat] = useState([]);
   const [seatNumber, setSeatNumber] = useState([]);
-  const [select, setSelect] = useState([]);
+  const [select, setSelect] =useState([{ name: '', age: '',gender:''}]);
   const [userData, setUserData] = useState([]);
-  const [bookedSeat, setBookedSeat] = useState([]);
+  const [bookedSeat, setBookedSeat] = useState();
   const [details, setDetails] = useState();
   const [price, setPrice] = useState("");
-  const [name, setName] = useState();
-  const [age, setAge] = useState();
-  const [gender, setGender] = useState();
+
   const [drop, setDrop] = useState([]);
   const [board, setboard] = useState([]);
   const [mul, setMul] = useState("0");
@@ -58,7 +56,7 @@ const Chooseseat = () => {
     let newSeat = e.target.value;
     console.log(newSeat);
     if (reservedSeat.includes(newSeat)) {
-      // e.target.disabled = true
+      
       if(seatNumber.includes(newSeat)){
         setSeatNumber(seatNumber.filter((seat) => seat !== newSeat));
 
@@ -75,14 +73,7 @@ const Chooseseat = () => {
   
   const renderPassengerData = (seatArray) => {
     return seatArray.map((seat, idx) => {
-      return (
-        <>
-          <div key={idx} className="seatfrm">
-            <span class="text-capitalize text-center">Passenger{idx+1}</span>
-            
-          </div>
-          </>
-      );
+      
     });
   };
   const handleSubmitDetails = (e) => {
@@ -99,11 +90,12 @@ const Chooseseat = () => {
     // setReservedSeat(...reservedSeat,select)
 
 
-
+    
     setSeatNo(seatNumber);
     console.log("reservedseat", seatNumber);
     console.log("Price",userData.bus_id)
     setBookedSeat(seatNumber.length);
+    
     setDrop(userData[0].dropping_point);
     setboard(userData[0].boarding_point);
     console.log("hi", seatNumber.length);
@@ -111,8 +103,9 @@ const Chooseseat = () => {
     console.log("hi",userData[0].businfos[0].Price);
     
     setMul(seatNumber.length * userData[0].businfos[0].Price);
-   
+ 
     handleTotal();
+    handleAddField (seatNumber.length)
     // setProcess(handleProceed());
   };
   const handleUser = () => {
@@ -124,62 +117,99 @@ const Chooseseat = () => {
       </>
     );
   };
+  const handleAddField = (count) => {
+    console.log("count",count)
+    const newFields = [];
+    for (let i = 1; i <= count; i++) {
+      newFields.push({name:'',age:'',gender:''});
+      setSelect([...newFields]);
+     
+    }
+    setShowField(true);
+   
+    
+  };
+
+  const handleInputChange = (event, index) => {
+    const { name, value } = event.target;
+    const newFields = [...select];
+    newFields[index][name] = value;
+    setSelect(newFields);
+    console.log(newFields)
+  };
   //Price calculation function
   const handleTotal = (e) => {
   
+  
     return (
       <>
+        
         <div  >
           <p>{details}</p>
-          <label>Name:</label>
+      
+          {showField && (
+        <div className="appending_div">
+          {select.map((field, index) => (
+          <div key={index}>
+            
+             <label className="fs-5 ">Passenger {index + 1}: </label><br/><br/>
+            <label className="m-1">Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={field.name}
+              onChange={(event) => handleInputChange(event, index)}
+            />
+            <label className="m-1">Age :</label>
+            <input
+              type="text"
+              name="age"
+              value={field.age}
+              onChange={(event) => handleInputChange(event, index)}
+            /><br/><br/>
+       
           <input
-            className="boo mx-4"
-            type="text"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></input>
+          className="book mx-4"
+          type="radio"
+          name="gender"
+          value="male"
+          onChange={(event) => handleInputChange(event, index)}
+        ></input>
+        <label>Male</label>
+        <input
+          className="book mx-4"
+          type="radio"
+          name="gender"
+          value="Female"
+          onChange={(event) => handleInputChange(event, index)}
+        ></input>
+        <label>Female</label>
+        <input
+          className="book mx-4"
+          type="radio"
+          name="gender"
+          value="Others"
+          onChange={(event) => handleInputChange(event, index)}
+        ></input>
+        <label>Others</label>
+        <hr></hr>
+        </div>
+      
+        ))}
+         
+          </div>
+      )}
           <br />
-          <label>Age:</label>
-          <input
-            className="boo mx-4"
-            type="text"
-            name="age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-          ></input>
-          <br />
-          <input
-            className="book mx-4"
-            type="radio"
-            name="gender"
-            value="male"
-            onChange={(e) => setGender(e.target.value)}
-          ></input>
-          <label>Male</label>
-          <input
-            className="book mx-4"
-            type="radio"
-            name="gender"
-            value="Female"
-            onChange={(e) => setGender(e.target.value)}
-          ></input>
-          <label>Female</label>
-          <input
-            className="book mx-4"
-            type="radio"
-            name="gender"
-            value="Others"
-            onChange={(e) => setGender(e.target.value)}
-          ></input>
-          <label>Others</label>
+          
         
 
           <div className="board-drop ">
+         
             <div className="boarding_point mx-5">
               {board.map((item, id) => {
                 return (
                   <div key={id}>
+                    
                     <input
                       type="Radio"
                       name="board"
@@ -193,9 +223,14 @@ const Chooseseat = () => {
               })}
             </div>
             <div className="dropping_point mx-5 ">
+           
               {drop.map((item, id) => {
+              
                 return (
+                  <>
+                 
                   <div key={id}>
+                   
                     <input
                       type="Radio"
                       name="drop"
@@ -205,7 +240,9 @@ const Chooseseat = () => {
                     ></input>
                     <label>{item}</label>
                   </div>
+                  </>
                 );
+               
               })}
             </div>
           </div>
@@ -253,9 +290,7 @@ const Chooseseat = () => {
       bus_id: userData[0].bus_id,
       user_id: localStorage.getItem("Userid"),
       busroute_id:userData[0]._id,
-      name:name,
-      age:age,
-      gender:gender,
+      user_detail:select,
       boarding_point: userboard,
       dropping_point: userdrop,
       no_of_seats: bookedSeat,
@@ -270,9 +305,7 @@ const Chooseseat = () => {
         bus_id: userData[0].bus_id,
         user_id: localStorage.getItem("Userid"),
         busroute_id:userData[0]._id,
-        name:name,
-        age:age,
-        gender:gender,
+        user_detail:select,
         boarding_point: userboard,
         dropping_point: userdrop,
         no_of_seats: bookedSeat,
@@ -296,17 +329,20 @@ const Chooseseat = () => {
 
   return (
     <>
-      <div className=" w-50">
+    <div className="container d-flex ml-5">
+    <div className=" container1  mt-5">
+      <div className="">
         <form onSubmit={handleSubmitDetails}>
           <div className="seatcontainer w-50">
             {seat.map((item, id) => (
               <div className="seats w-25" key={id} onClick={(e)=>getSeatNumber(e,id)}>
-                <p className="seat w-100">
+                <p className="seat ">
                   <input
                     type="checkbox"
                     name="seat"
                     value={item}
                      id={item}
+                    //  checked={seatNumber.includes(item)}
                      disabled={reservedSeat.includes(item)}
                     
 
@@ -319,10 +355,21 @@ const Chooseseat = () => {
             ))}
           </div>
           { }
-          {handleTotal()}
-          <input type="submit"></input>
+         <div className="text-center">
+          
+          <button type="submit" className="btn btn-danger">Confirm</button>
+          </div>
         </form>
-      </div>
+        </div>
+        </div>
+   
+        <div className="box w-60  p-5  mt-5 ">
+        {handleTotal()}
+
+        </div>
+        </div>
+   
+    
     </>
   );
 };

@@ -2,11 +2,29 @@ import React, { useState } from "react";
 import '../assests/css/login.css';
 import axios from "axios";
 import Registration from "./Registration";
+import { Link } from "react-router-dom";
 
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const[popup,setpopup] =useState('close');
+
+  const open = () =>{
+    switch(popup){
+      case "close":
+        setpopup('open');
+        return
+      case "open":
+        setpopup('close');
+        return
+    
+      default:
+        setpopup('close');
+        return;
+    }
+    
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -33,8 +51,10 @@ export default function Login(props) {
   }
 
   return (<>
+   
  {props.somepop ==="open"?
     <div className="auth-wrapper  p-5">
+      {popup==="open"?<Registration somepop={popup}/>:<>
       <div className="auth-inner  m-auto w-25">
         <form onSubmit={handleSubmit}>
           <h3>Sign In</h3>
@@ -59,22 +79,15 @@ export default function Login(props) {
             />
           </div>
 
-          <div className="mb-3">
-            <div className="custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                className="custom-control-input"
-                id="customCheck1"
-              />
-              <label className="custom-control-label" htmlFor="customCheck1">
-                Remember me
-              </label>
-            </div>
-          </div>
-
+          
           <div className="d-grid">
             <button type="submit" className="btn btn-primary">
               Submit
+            </button>
+          </div><br/>
+          <div className="d-grid">
+           <button type="submit" className="btn btn-primary" onClick={(e)=>open(e)}>
+              signup
             </button>
           </div>
           <br></br>
@@ -84,6 +97,7 @@ export default function Login(props) {
           </p>
         </form>
       </div>
+      </>}
     </div>:""}
     </>
 

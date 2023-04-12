@@ -2,6 +2,7 @@ import {React,useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import '../assests/css/adminhome.css'
 
 
 const RouteDetails = () =>{
@@ -30,7 +31,7 @@ return(
      <div className="">
       
       
-      <table className="table">
+      <table className="routetable">
         <thead>
           <tr>
             <th> S.No</th>
@@ -38,7 +39,7 @@ return(
             <th>Destination</th>
             <th>Arrival Time</th>
             <th>Departure Time</th>
-            <th>Seats</th>
+            <th >Seats</th>
             <th>Reserved seat</th>
             <th>Boarding Point</th>
             <th>Dropping Point</th>
@@ -53,7 +54,7 @@ return(
                 <td>{item.destination}</td>
                 <td>{item.arrival_time}</td>
                 <td>{item.departure_time}</td>
-                <td>{item.available_Seat}</td>
+                <td>{item.available_Seat.length}</td>
                 <td>{item.reserved_seat}</td>
                 <td>{item.boarding_point}</td>
                 <td>{item.dropping_point}</td>
@@ -69,10 +70,10 @@ return(
                      
                     ></i>
                   </span>
-                
+                  <Link to={`/bookinginfo/${item._id}`}>
                   <span className="btn">
                     <i class="bi bi-eye-fill"></i>
-                  </span>
+                  </span></Link>
                  
                 </td>
               </tr>

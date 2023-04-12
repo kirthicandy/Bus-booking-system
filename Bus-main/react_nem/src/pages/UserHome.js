@@ -8,11 +8,9 @@ import { Link } from "react-router-dom";
 import "../assests/css/userhome.css";
 export default function BusList({ userData }) {
   // const [obj, setObj] = useState('')
-  const [reset, Setreset] = useState(false);
-  const [arrowDown, setArrowDown] = useState(false);
-  const [clas, SetClas] = useState(true);
+ ;
   const [Businfo, setBusinfo] = useState([]);
-
+ const [time,setTime] =useState("")
   const [choose, setChoose] = useState(null);
   const [choos, setChoos] = useState(null);
   const [chooseDate, setChooseDate] = useState("");
@@ -21,6 +19,14 @@ export default function BusList({ userData }) {
     if (!choose) {
       axios.get("http://localhost:2112/busroute/aggregate").then((data) => {
         setBusinfo(data.data);
+        setTime(data.data.departure_time&& data.data.departure_time>0&&data.data.departure_time.map(time =>time.toLocaleTimeString()))
+        console.log(data.data.departure_time.map(time =>time.toLocaleTimeString()))
+        
+       
+        
+       
+       
+    
         
 
         // handleBusInfo()
@@ -29,7 +35,7 @@ export default function BusList({ userData }) {
     // const handleBusInfo = () =>{
 
     // })
-  });
+  },[]);
   const getSearch = (e) => {
     setChoose(e.target.value);
     console.log(e.target.value);
@@ -72,8 +78,8 @@ export default function BusList({ userData }) {
     localStorage.setItem("Userid", userid);
     localStorage.setItem("Source", Source);
     console.log("hi", bId);
-    SetClas(false);
-    setArrowDown(true);
+    
+
   };
 
   // const handleReset = (e) => {
@@ -188,19 +194,15 @@ export default function BusList({ userData }) {
                     <div className="w-100 d-none d-md-block"></div>
 
                     <div className="col-6 col-sm-3 mb-4">{bus._id}</div>
-                    <div className="col-6 col-sm-3 mb-4">{bus.source}</div>
-                    <div className="col-6 col-sm-3 mb-4">{bus.destination}</div>
+                    <div className="col-6 col-sm-3 mb-4">{bus.source}<br/><br/> Departure Time: <br/>{time}</div>
+                    <div className="col-6 col-sm-3 mb-4">{bus.destination}<br/><br/> Arrival Time: <br/>{bus.arrival_time}</div>
                     <div className="col-6 col-sm-3 mb-4">
                       {bus.busroute[0].Bus_Type}
                     </div>
                     <div className="col-6 col-sm-4 mb-2 ml-0">
                       <Link to="/choose">
                         <button
-                          className={
-                            clas
-                              ? "btn btn-primary btn-md"
-                              : "btn btn-primary btn-md disabled"
-                          }
+                         className="btn btn-primary"
                           onClick={() => {
                             handleSubmit(bus.bus_id, userData._id, bus.source);
                           }}
@@ -209,14 +211,7 @@ export default function BusList({ userData }) {
                         </button>
                       </Link>
                     </div>
-                    {/* <div className="col-6 col-sm-4 mb-2 ml-0">
-                    <span
-                      className={reset ? "badge badge-danger ml-5" : "disabled"}
-                      // onClick={(e) => handleReset(e)}
-                    >
-                      Reset
-                    </span>
-                  </div> */}
+                
                   </div>
                 </div>
               );

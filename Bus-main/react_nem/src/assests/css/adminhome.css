@@ -2,3 +2,15 @@
     margin: 0;
     padding: 0;
 }
+table{
+    width: 100%;
+    margin: 10px;
+}
+table,th,td,tr{
+    border: 1px solid black;
+   
+ 
+}
+th,td{
+    padding: 10px;
+}

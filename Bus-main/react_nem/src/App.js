@@ -4,7 +4,7 @@ import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import UserDetails from "./pages/UserDetails";
-import SeatPicker from "./pages/SeatPicker";
+
 import Add from "./pages/Add";
 import Update from './pages/Update'
 import MyBooking from "./pages/MyBooking";
@@ -13,6 +13,8 @@ import RouteDetails from "./pages/RouteDetails";
 import UpdateBusInfo from "./pages/UpdateBusInfo";
 import UpdateRouteInfo from "./pages/UpdateRouteInfo";
 import AddRoute from "./pages/AddRoute";
+import Example from "./pages/Example";
+import BookingDetails from "./pages/BookingDetails";
 
 
 
@@ -27,7 +29,8 @@ function App() {
           <Route path="/signup" element={<Registration/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/userDetails" element={<UserDetails/>}/>
-          <Route path="/seat" element={<SeatPicker/>}/>
+          <Route path="/rec" element={<Example/>}/>
+          <Route path="/bookinginfo/:id" element={<BookingDetails/>}/>
           <Route path="/add" element={<Add/>}/>
           <Route path="/update" element={<Update/>}/>
           <Route path="/mybook" element={<MyBooking/>}/>
@@ -35,6 +38,7 @@ function App() {
           <Route path="/route/:id" element={<RouteDetails/>}/>
           <Route path="/addroute/:id" element={<AddRoute/>}/>
           <Route path="/updatebusinfo/:id" element={<UpdateBusInfo/>}/>
+          <Route path="/updaterouteinfo/:id" element={<UpdateRouteInfo/>}/>
           <Route path="/updaterouteinfo/:id" element={<UpdateRouteInfo/>}/>
          
     
