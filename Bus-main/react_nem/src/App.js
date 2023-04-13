@@ -6,20 +6,20 @@ import Home from "./pages/Home";
 import UserDetails from "./pages/UserDetails";
 
 import Add from "./pages/Add";
-import Update from './pages/Update'
+
 import MyBooking from "./pages/MyBooking";
 import Chooseseat from "./pages/Chooseseat";
 import RouteDetails from "./pages/RouteDetails";
 import UpdateBusInfo from "./pages/UpdateBusInfo";
 import UpdateRouteInfo from "./pages/UpdateRouteInfo";
 import AddRoute from "./pages/AddRoute";
-import Example from "./pages/Example";
+
 import BookingDetails from "./pages/BookingDetails";
 
 
 
 function App() {
-  const isLoggedIn = window.localStorage.getItem("loggedIn");
+ 
   return (
     <div className="App">
       <BrowserRouter>
@@ -29,10 +29,10 @@ function App() {
           <Route path="/signup" element={<Registration/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/userDetails" element={<UserDetails/>}/>
-          <Route path="/rec" element={<Example/>}/>
+          
           <Route path="/bookinginfo/:id" element={<BookingDetails/>}/>
           <Route path="/add" element={<Add/>}/>
-          <Route path="/update" element={<Update/>}/>
+        
           <Route path="/mybook" element={<MyBooking/>}/>
           <Route path="/choose" element={<Chooseseat/>}/>
           <Route path="/route/:id" element={<RouteDetails/>}/>

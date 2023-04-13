@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const programRouter = require("./router/route");
 const busInfoRouter = require("./router/businfo")
 const busRoute = require("./router/busroutes")
-const reverseroute = require("./router/reverseroutes")
+
 const booking = require("./router/Booking")
 
 const url = "mongodb://127.0.0.1/user";
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use("/info", programRouter);
 app.use("/businfo", busInfoRouter);
 app.use("/busroute", busRoute);
-app.use("/reverseroutes", reverseroute);
+
 app.use("/booking", booking);
 
 

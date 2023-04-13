@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../assests/css/login.css';
 import axios from "axios";
 import Registration from "./Registration";
-import { Link } from "react-router-dom";
+
 
 
 export default function Login(props) {
@@ -57,10 +57,10 @@ export default function Login(props) {
       {popup==="open"?<Registration somepop={popup}/>:<>
       <div className="auth-inner  m-auto w-25">
         <form onSubmit={handleSubmit}>
-          <h3>Sign In</h3>
+          <h3 className="text-light m-3">Sign In</h3>
 
           <div className="mb-3 w-5">
-            <label>Email </label>
+            <label  className="text-light">Email </label>
             <input
               type="email"
               className="form-control"
@@ -70,7 +70,7 @@ export default function Login(props) {
           </div>
 
           <div className="mb-3">
-            <label>Password</label>
+            <label className="text-light">Password</label>
             <input
               type="password"
               className="form-control"
@@ -78,17 +78,18 @@ export default function Login(props) {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
+<div className="m-5 d-flex">
           
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              Submit
+          <div className="w-50">
+            <button type="submit" className="btn btn-primary ">
+             Login
             </button>
           </div><br/>
-          <div className="d-grid">
+          <div className="w-50">
            <button type="submit" className="btn btn-primary" onClick={(e)=>open(e)}>
-              signup
+             Sign up
             </button>
+          </div>
           </div>
           <br></br>
           <p className="forgot-password text-right">

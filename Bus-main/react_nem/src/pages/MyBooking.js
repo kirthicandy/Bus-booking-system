@@ -7,6 +7,7 @@ const [data,setData] = useState()
 const [dataLength,setDataLength] = useState()
 
 
+
 useEffect(()=>{
     handleBooking()
 
@@ -26,7 +27,7 @@ const handleBooking = async() =>{
 
 
 }
-const handleCancel = async(e,bId,busid,book) =>{
+const handleCancel = async(bId,busid,book) =>{
    if(window.confirm("Are you Sure! You have to Cancel?")) {
     await axios.put('http://localhost:2112/booking/cancel',{
         booking_id:bId,
@@ -35,6 +36,7 @@ const handleCancel = async(e,bId,busid,book) =>{
     }
     ).then((data)=>{
         console.log(data)
+      
         
       
     })
@@ -42,7 +44,7 @@ const handleCancel = async(e,bId,busid,book) =>{
 
    }
    else{
-    alert('Cancelled')
+    alert('Done')
    }
  
  
@@ -54,7 +56,7 @@ return(
      <div className="">
     {dataLength >0?
     <>
-   ({data && data.length>0 && data.map((item, index) => {
+   {data && data.length>0 && data.map((item, index) => {
         return (
             <>
             <h4>Booking {index+1}:</h4>
@@ -85,7 +87,8 @@ return(
     <td>{item.no_of_seats}</td>
     <td>{item.booked_seats}</td>
     <td>{item.total_price}</td>
-    <td></td>
+    
+ 
     
   </tr>
 
@@ -100,7 +103,7 @@ return(
           </>
         )
         
-      })})</>
+      })}</>
 
     
 :<h4>No Booking yet</h4>}

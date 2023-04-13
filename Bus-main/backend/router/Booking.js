@@ -4,14 +4,6 @@ const booking = require("../model/booking");
 const busroute = require("../model/busroute");
 const mongoose = require("mongoose");
 
-router.get("/:id", async (req, res) => {
-  try {
-    const detail = await booking.find({busroute_id:req.params.id});
-    res.json(detail);
-  } catch (err) {
-    res.send("Error" + err);
-  }
-});
 
 router.post("/mybook", async (req, res) => {
   const{user_id}=req.body
@@ -28,7 +20,7 @@ router.put("/cancel", async (req, res) => {
 try {
   const detail = await booking.find({booking_id}).then(async()=>{
     const detail2= await busroute.findById({_id:busroute_id})
-    let array = detail2.reserved_seat.filter((item,id)=>{
+    let array =  detail2.reserved_seat.filter((item,id)=>{
      return( !booked_seats.includes(item))
      
     })
@@ -77,6 +69,15 @@ router.post("/", async (req, res) => {
    
   }
 });
+router.get("/:id", async (req, res) => {
+  try {
+    const detail = await booking.find({busroute_id:req.params.id});
+    res.json(detail);
+  } catch (err) {
+    res.send("Error" + err);
+  }
+});
+
 
 
 

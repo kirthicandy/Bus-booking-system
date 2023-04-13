@@ -123,6 +123,7 @@ const Registration = (props) => {
     setDataError({ ...err });
 
     return Object.keys(err).length < 1;
+ 
   };
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -163,14 +164,14 @@ const Registration = (props) => {
          <Login somepop={popup}/>
         <MDBCard className="register text-black m-auto " style={{ borderRadius: "25px" }}>
           <MDBCardBody>
-            <p className="text-center h3 fw-bold ">
+            <p className="text-center text-white h3  ">
               Sign up
             </p>
 
-            <div className=" align-items-center ">
-              <MDBIcon fas icon="user me-3" size="lg" />
+            <div className=" align-items-center m-3 ">
+             
               <MDBInput
-                placeholder="Your Name"
+                placeholder="Your Name..."
                 id="form1"
                 type="text"
                 value={username}
@@ -182,11 +183,11 @@ const Registration = (props) => {
             </div>
           
 
-            <div className=" align-items-center ">
+            <div className=" align-items-center m-3 ">
               {" "}
-              <MDBIcon className="fas fa-globe me-2" size="" />
+             
               <MDBInput
-                placeholder="Your Age"
+                placeholder="Your Age..."
                 id="form1"
                 type="text"
                 name="age"
@@ -198,11 +199,11 @@ const Registration = (props) => {
             </div>
             
 
-            <div className=" align-items-center ">
+            <div className=" align-items-center m-3 ">
               {" "}
-              <MDBIcon fas icon="envelope me-3" size="lg" />
+              
               <MDBInput
-                placeholder="Your Email"
+                placeholder="Your Email..."
                 id="form2"
                 name="email"
                 type="email"
@@ -214,11 +215,11 @@ const Registration = (props) => {
             </div>
             
 
-            <div className=" align-items-center  ">
+            <div className=" align-items-center m-3  ">
               {" "}
-              <MDBIcon fas icon="lock me-3" size="lg" />
+             
               <MDBInput
-                placeholder="Password"
+                placeholder="Password..."
                 id="form3"
                 name="password"
                 type="password"
@@ -228,12 +229,12 @@ const Registration = (props) => {
               />
               <span className="non-valid">{dataError.password}</span>
             </div>
-            <div className=" align-items-center  ">
+            <div className=" align-items-center  m-3 ">
               {" "}
-              <MDBIcon fas icon="key me-3" size="lg" />
+            
               <MDBInput
                 name="cnfmpassword"
-                placeholder="Repeat your password"
+                placeholder="Repeat your password..."
                 id="form4"
                 type="password"
                 className="w-75 m-auto"
@@ -243,12 +244,12 @@ const Registration = (props) => {
               <span className="non-valid">{dataError.cnfmpassword}</span>
             </div>
 
-            <div className=" align-items-center ">
+            <div className=" align-items-center m-3  ">
               {" "}
-              <MDBIcon fas icon="fa-mobile me-4 " size="lg" />
+           
               <MDBInput
                 name="number"
-                placeholder="Number "
+                placeholder="Mobile number..."
                 id="form5"
                 type="text"
                 className="w-75 m-auto"
@@ -258,7 +259,7 @@ const Registration = (props) => {
               <span className="non-valid">{dataError.number}</span>
             </div>
 
-            <div>
+            <div className="text-light">
               <MDBRadio
                 className=""
                 name="gender"
@@ -283,16 +284,18 @@ const Registration = (props) => {
                 label="Others "
                 value="Others"
                 inline
-              />
+              /><br/>
+                <span className="non-valid">{dataError.gender}</span>
             </div>
+          
 
             <button className="mt-4 btn btn-primary m-3" onClick={handleSubmit}>
               Register
             </button>
-            <div className="m-auto align-items-center ">
-              <span>Have an account?</span>
+            <div className="m-auto align-items-center text-light ">
+              <span className="me-3">Have an account?</span>
               
-                <button className=" btn btn-primary " onClick={(e)=>open(e)}>Login</button>
+                <button className=" btn btn-primary ml-5" onClick={(e)=>open(e)}>Login</button>
               
             </div>
           </MDBCardBody>

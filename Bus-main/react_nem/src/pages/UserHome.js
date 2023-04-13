@@ -100,10 +100,10 @@ export default function BusList({ userData }) {
       <div id="app">
         <div className="text-end">
           <Link to="/mybook">
-            <button className="btn btn-secondary m-1">MyBooking</button>
+            <button className="btn btn-danger bg-gradient m-1">MyBooking</button>
           </Link>
           <PopupMenu>
-            <button className="btn btn-secondary ">
+            <button className="btn btn-danger bg-gradient ">
               <i className="far fa-circle-user m-1"></i>
               <small>{userData.email}</small>
             </button>
@@ -120,7 +120,7 @@ export default function BusList({ userData }) {
                 <hr style={{ margin: "0 -24px 24px" }} />
 
                 <div className="d-grid">
-                  <button className="btn btn-secondary" onClick={logout}>
+                  <button className="btn btn-danger" onClick={logout}>
                     <small>Logout</small>
                   </button>
                 </div>
@@ -130,46 +130,47 @@ export default function BusList({ userData }) {
         </div>
       </div>
 
-      <div className="searchdetails mx-5">
       
-        <div class="row w-100 align-items-center">
-          <div class="col">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="From"
-              data={Businfo}
-              onChange={(e) => getSearch(e)}
-            />
-          </div>  
-          <div class="col">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="To"
-              data={Businfo}
-              onChange={(e) => getdesSearch(e)}
-            />
-          </div>  
-          <div class="col">
-            <input
-              type="date"
-              class="form-control"
-              placeholder="From"
-              data={Businfo}
-              onChange={(e) => getDateSearch(e)}
-            />
-          </div>
-          <div class="col">
-          <button className="btn btn-primary ml-5 w-25"  onClick={(e) => handleFilter(e)}>search</button>
-          </div>
-        </div>
-  
         
 
     
 
-        <div className="buscontainer">
+        <div className="buscontainer m-auto">
+        <div className="searchdetails mx-5 ">
+      
+      <div class="row align-items-center">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="From"
+            data={Businfo}
+            onChange={(e) => getSearch(e)}
+          />
+        </div>  
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="To"
+            data={Businfo}
+            onChange={(e) => getdesSearch(e)}
+          />
+        </div>  
+        <div class="col">
+          <input
+            type="date"
+            class="form-control"
+            placeholder="From"
+            data={Businfo}
+            onChange={(e) => getDateSearch(e)}
+          />
+        </div>
+        <div class="col">
+        <button className="btn btn-danger ml-5 w-25"  onClick={(e) => handleFilter(e)}>search</button>
+        </div>
+      </div>
+
           {Businfo &&
             Businfo.length > 0 &&
             Businfo
@@ -178,31 +179,28 @@ export default function BusList({ userData }) {
               return (
                 <div key={idx} className="card mt-5 buslist">
                   <div className="row ml-5">
-                    <div className="col-6 col-sm-3 mt-2 font-weight-bold ">
-                      _id
+                    <div className="col-6 col-sm-3 mt-2 fw-bold">
+                     
                     </div>
-                    <div className="col-6 col-sm-3 mt-2 font-weight-bold ">
+                    <div className="col-6 col-sm-3 mt-2 fw-bold ">
                       From
                     </div>
-                    <div className="col-6 col-sm-3 mt-2 font-weight-bold ">
+                    <div className="col-6 col-sm-3 mt-2 fw-bold">
                       To
                     </div>
-                    <div className="col-6 col-sm-3 mt-2 font-weight-bold ">
+                    <div className="col-6 col-sm-3 mt-2 fw-bold ">
                       Price
                     </div>
 
                     <div className="w-100 d-none d-md-block"></div>
 
-                    <div className="col-6 col-sm-3 mb-4">{bus._id}</div>
-                    <div className="col-6 col-sm-3 mb-4">{bus.source}<br/><br/> Departure Time: <br/>{time}</div>
-                    <div className="col-6 col-sm-3 mb-4">{bus.destination}<br/><br/> Arrival Time: <br/>{bus.arrival_time}</div>
-                    <div className="col-6 col-sm-3 mb-4">
-                      {bus.busroute[0].Bus_Type}
-                    </div>
-                    <div className="col-6 col-sm-4 mb-2 ml-0">
-                      <Link to="/choose">
+                    <div className="col-6 col-sm-3 mb-4  text-danger fw-bold">{bus.busroute[0].Bus_name}<br/>{bus.busroute[0].Bus_Type}</div>
+                    <div className="col-6 col-sm-3 mb-4">{bus.source}<br/><br/><b>Arrival Time:</b> <br/>{bus.arrival_time}</div>
+                    <div className="col-6 col-sm-3 mb-4">{bus.destination}<br/><br/> <b> Departure Time: </b><br/>{bus.departure_time}</div>
+                    <div className="col-6 col-sm-3 mb-4 fw-bold "><br/>
+                     <label className="bg-warning">$  {bus.busroute[0].Price}  </label><br/><br/><Link to="/choose">
                         <button
-                         className="btn btn-primary"
+                         className="btn btn-danger"
                           onClick={() => {
                             handleSubmit(bus.bus_id, userData._id, bus.source);
                           }}
@@ -211,6 +209,7 @@ export default function BusList({ userData }) {
                         </button>
                       </Link>
                     </div>
+                   
                 
                   </div>
                 </div>

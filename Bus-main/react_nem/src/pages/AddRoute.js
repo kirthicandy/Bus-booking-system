@@ -65,6 +65,7 @@ const AddRoute = () => {
   };
 
   const handleAddRoute = async () => {
+   
     await axios
       .post("http://localhost:2112/busroute", {
         bus_id: id,
@@ -78,9 +79,13 @@ const AddRoute = () => {
         reserved_seat: reserved_seat,
       })
       .then((res) => {
-        console.log(res);
-        alert("Successfully Registered");
-        window.open(`/route/${id}`, "_self");
+       
+        if(res.data.status==="ok"){
+          alert("Successfully Registered");
+          window.open("/userDetails", "_self");}else{
+            alert("Invalid");
+  
+          }
       })
       .catch((err) => {
         console.log(err);

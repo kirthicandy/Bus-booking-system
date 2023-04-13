@@ -35,9 +35,14 @@ const Add = () => {
         Price: Price,
       })
       .then((res) => {
-        console.log(res);
+       
+       
+        if(res.data.status==="ok"){
         alert("Successfully Registered");
-        window.open("/userDetails", "_self");
+        window.open("/userDetails", "_self");}else{
+          alert("Invalid");
+
+        }
       })
       .catch((err) => {
         console.log(err);

@@ -9,3 +9,8 @@
   background-color: rgba(49, 48, 48, 0.5);
   width: 30vw;
 }
+.non-valid{
+  color:azure;
+  font-weight: 50;
+  font-size: small;
+}
