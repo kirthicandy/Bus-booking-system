@@ -1,0 +1,41 @@
+.buslist {
+    margin-top: 20px;
+    height: 20vh;
+    background-color: rgba(240, 133, 125, 0.548);
+}
+.Businfo{
+    background-color: #f1eeee;
+}
+
+.row {
+    margin-left: 15px;
+}
+.buscontainer{
+    width: 90vw;
+}
+
+.suggestion{
+    cursor: pointer;
+   
+    color: rgba(25, 26, 27, 0.5) 
+   
+}
+
+
+#app {
+    border: 3px solid #e3e3e3;
+    border-radius: 4px;
+    padding: 10px;
+   
+} 
+
+    #circle-avatar {
+      display: grid;
+      width: 100px;
+      height: 100px;
+
+      border-radius: 50%;
+      background-color: rgba(240, 133, 125, 0.548);
+      place-items: center;
+    }
+     
