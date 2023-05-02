@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const businfo = require("../model/Businfo");
 const mongoose = require("mongoose");
+
+
+
 /**
  * @swagger
  * components:
@@ -85,16 +88,7 @@ router.get("/:id", async (req, res) => {
     res.send("Error" + err);
   }
 });
-router.put("/delete/:id", async (req, res) => {
-  try {
-    const detail = await businfo.findById(req.params.id);
-    detail.deleted = true
-    await detail.save()
-    res.json(detail);
-  } catch (err) {
-    res.send("Error" + err);
-  }
-});
+
 /**
  *@swagger
  * /businfo:
@@ -266,4 +260,16 @@ router.put('/update/:id',async(req,res)=>{
        console.log('err',err)
   }
 })
+router.put("/delete/:id", async (req, res) => {
+  console.log("id",req.params.id)
+  try {
+    const detail = await businfo.findOne({_id:req.params.id});
+    detail.deleted = true
+    await detail.save()
+    res.json(detail);
+  } catch (err) {
+    res.send("Error" + err);
+    console.log(err)
+  }
+});
 module.exports = router;

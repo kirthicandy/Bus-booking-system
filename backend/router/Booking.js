@@ -128,7 +128,7 @@ router.put("/cancel", async (req, res) => {
   try {
     const bookingDoc = await booking.findOne({ _id: booking_id });
 
-    bookingDoc.deleted = true;
+   
     bookingDoc.status = "Cancelled";
 
     await bookingDoc.save();

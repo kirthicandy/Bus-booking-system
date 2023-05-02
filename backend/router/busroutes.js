@@ -274,7 +274,18 @@ router.get("/:id", async (req, res) => {
     res.send("Error" + err);
   }
 });
-
+router.put("/delete/:id", async (req, res) => {
+  console.log("id",req.params.id)
+  try {
+    const detail = await busroute.findOne({_id:req.params.id});
+    detail.deleted = true
+    await detail.save()
+    res.json(detail);
+  } catch (err) {
+    res.send("Error" + err);
+    console.log(err)
+  }
+});
 /**
  *@swagger
  * /busroute/agi:

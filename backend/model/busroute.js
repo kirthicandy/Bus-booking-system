@@ -3,7 +3,10 @@ const mongoose = require("mongoose");
 const Businfo = require("./Businfo");
 
 const busSchema = new mongoose.Schema({
- 
+  deleted: {
+    type: Boolean,
+    default: false,
+  },
   bus_id: {
     ref: "businfo",
 

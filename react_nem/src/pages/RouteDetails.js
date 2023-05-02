@@ -11,14 +11,14 @@ const RouteDetails = () =>{
 
     useEffect(()=>{
         handlePost()
-    },[id])
+    },[id,data])
 
 const handlePost = async() =>{
     await axios
     .get(`http://localhost:2112/busroute/view/${id}`)
     .then((res) => {
-      console.log("busroute data=",res);
-      setData(res.data)
+     
+      setData(res.data.filter(data => !data.deleted))
 
     })
     .catch((err) => {
@@ -26,6 +26,13 @@ const handlePost = async() =>{
     });
 
 }
+const handleDelete = async(id)=>{
+  await axios.put(`http://localhost:2112/busroute/delete/${id}`).then((data)=>{
+    console.log(data)
+  })
+  
+}
+
 return(
     <>
      <div className="">
@@ -64,7 +71,7 @@ return(
                       <i class="bi bi-pencil-square"></i>
                     </Link>
                   </span>
-                  <span className="btn">
+                  <span className="btn" onClick={()=>handleDelete(item._id)}>
                     <i
                       class="bi bi-trash-fill"
                      

@@ -26,9 +26,7 @@ export default function BusList({ userData }) {
             data.data.departure_time > 0 &&
             data.data.departure_time.map((time) => time.toLocaleTimeString())
         );
-        console.log(
-          data.data.departure_time.map((time) => time.toLocaleTimeString())
-        );
+       
 
         // handleBusInfo()
       });

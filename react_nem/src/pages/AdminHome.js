@@ -11,20 +11,20 @@ const AdminHome = ({adminData}) => {
 
   const loadData = async () => {
     const response = await axios.get("http://localhost:2112/businfo");
-    setData(response.data);
+    setData(response.data.filter(data => !data.deleted));
   };
   useEffect(() => {
     loadData();
-  },[]);
+  },[data]);
   const logout = () => {
     window.localStorage.clear();
     window.open("./", "_self");
   };
   const handleDelete = async(id)=>{
-    await axios.put(`http://localhost:2112/businfo/delete/${_id}`).then((data)=>{
-      console.log(data.data.filter(data => !data.deleted))
-      setData(data.data.filter(data => !data.deleted))
+    await axios.put(`http://localhost:2112/businfo/delete/${id}`).then((data)=>{
+      console.log(data)
     })
+    
   }
 
    
@@ -90,7 +90,7 @@ const AdminHome = ({adminData}) => {
                       <i class="bi bi-pencil-square"></i>
                     </Link>
                   </span>
-                  <span className="btn" onClick={(item_id)=>handleDelete(item_id)}>
+                  <span className="btn" onClick={()=>handleDelete(item._id)}>
                     <i
                       class="bi bi-trash-fill"
                       

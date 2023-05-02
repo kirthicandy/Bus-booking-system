@@ -4,6 +4,7 @@ import axios from "axios";
 const MyBooking = () =>{
 
 const [data,setData] = useState()
+
 const [dataLength,setDataLength] = useState()
 
 
@@ -11,7 +12,7 @@ const [dataLength,setDataLength] = useState()
 useEffect(()=>{
     handleBooking()
 
-},[data])
+},[])
 const handleBooking = async() =>{
     await axios.post('http://localhost:2112/booking/mybook',{
     user_id:window.localStorage.getItem("user_id"),}
@@ -73,6 +74,7 @@ return(
       <th>Ticket</th>
       <th>Seat No</th>
       <th>Cost</th>
+      <th>Status</th>
     </tr>
   </thead>
   <tbody>
@@ -80,13 +82,15 @@ return(
     <tr key={item._id}>
     <th scope="row">{id + 1}</th>
     <td>{i.name}</td>
-    <td>{i.gender}</td>
     <td>{i.age}</td>
+    <td>{i.gender}</td>
     <td>{item.boarding_point}</td>
     <td>{item.dropping_point}</td>
     <td>{item.no_of_seats}</td>
     <td>{item.booked_seats}</td>
     <td>{item.total_price}</td>
+    <td className={item.status === 'Booked' ? 'bg-warning' : 'bg-danger'}>{item.status}</td>
+
     
  
     
